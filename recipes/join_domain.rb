@@ -82,5 +82,5 @@ dsc_resource 'xComputer_joindomain' do
     node['test_kitchen_adds']['addomain']['domain_administrator_password']
   )
   property :Name, node['hostname']
-  reboot_action :request_reboot
+  reboot_action :reboot_now
 end

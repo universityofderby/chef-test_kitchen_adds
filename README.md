@@ -28,9 +28,9 @@ Include `test_kitchen_adds` as a dependency in your cookbook's `metadata.rb`.
 
 .kitchen.yml
 ------------
-Include a domain_controller suite in your cookbook to provide an Active Directory domain to join.
+Include a domain_controller suite in your cookbook to provide an Active Directory domain to join.  Use `kitchen converge` rather than `kitchen test` to avoid destroying the domain controller node before other suites are run.
 
-Add the 'hurry-up-and-test::set_non_nat_vbox_ip' and 'test_kitchen_adds::join_domain' recipes to any suites which need to join to this domain.
+Add the 'hurry-up-and-test::set_non_nat_vbox_ip' and 'test_kitchen_adds::join_domain' recipes to any suites which need to join to this domain.  The nodes provisioner is used to search for the domain controller IP in the join_domain recipe.
 
 The .kitchen.yml settings below configure a private network interface for each node and manage chef-client exit codes on reboot.
 
