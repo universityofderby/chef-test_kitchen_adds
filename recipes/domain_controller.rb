@@ -63,6 +63,6 @@ dsc_resource 'xADDomain_forest' do
   property :SafeModeAdministratorPassword, ps_credential(
     node['test_kitchen_adds']['addomain']['safemode_administrator_password']
   )
-  property :Sysvolpath, node['test_kitchen_adds']['addomain']['sysvol_path']
+  property :SysvolPath, node['test_kitchen_adds']['addomain']['sysvol_path']
   reboot_action :reboot_now
 end
