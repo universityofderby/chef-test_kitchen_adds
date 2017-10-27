@@ -1,0 +1,37 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: nodes
+  client_rb:
+    client_fork: false
+    exit_status: :enabled
+  retry_on_exit_code:
+    - 35
+  max_retries: 10
+  wait_for_retry: 60
+
+verifier:
+  name: pester
+
+platforms:
+  - name: windows
+    driver_config:
+      box: jacqinthebox/windowsserver2016core
+      network:
+        - ["private_network", {type: "dhcp"}]
+      customize:
+        usb: 'off'
+
+suites:
+  - name: domain_controller
+    driver:
+      vm_hostname: dc01
+    run_list:
+      - hurry-up-and-test::set_non_nat_vbox_ip
+      - test_kitchen_adds::domain_controller
+  - name: domain_member
+    run_list:
+      - hurry-up-and-test::set_non_nat_vbox_ip
+      - test_kitchen_adds::join_domain
